@@ -1,5 +1,5 @@
 class Game
-  
+
   def initialize(board_size)
     @board = Board.new(board_size)
     @win_checker = WinCheck.new(self, @board)
@@ -14,11 +14,11 @@ class Game
     player1_choice = gets.chomp.downcase
     if player1_choice == "x"
       @player1 = Player.new("Player1", "X")
-      @computer = Player.new("Computer", "O")
+      @computer = Computer.new("Computer", "O")
       @current_player = @player1
     elsif player1_choice == "o"
       @player1 = Player.new("Player1", "O")
-      @computer = Player.new("Computer", "X")
+      @computer = Computer.new("Computer", "X")
       @current_player = @player1
     else
       "Please enter a valid input"
@@ -28,9 +28,8 @@ class Game
 
   def play_turn(player)
     @board.show_board
-    puts "#{player.name}, what position would you like to choose?"
-    position_choice = gets.chomp
-    @board.update_board(position_choice, player)
+    player.choose_position(@board)
+
     if @win_checker.run
       puts "#{player.name} wins!"
     else
@@ -41,6 +40,7 @@ class Game
   def next_player
     if @current_player == @player1
       @current_player = @computer
+
     else
       @current_player = @player1
     end

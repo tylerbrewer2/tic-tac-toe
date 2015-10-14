@@ -3,13 +3,20 @@ class Game
   def initialize(board_size)
     @board = Board.new(board_size)
     @win_checker = WinCheck.new(self, @board)
+
+
     @current_player = nil
     set_up_game
     play_turn(@player1)
   end
 
   def set_up_game
-    puts "Welcome to Tic-Tac-Toe! (insert corny game music here)"
+    puts "Welcome to Traveler! (insert corny game music here)"
+    puts "_______     |_|     _______"
+    puts "\\      \\____|_|____/      /"
+    puts " \\         BATMAN        / "
+    puts "  \\_________   _________/   "
+    puts "            \\ /             "
     puts "Player-1, would you like to be X or O"
     player1_choice = gets.chomp.downcase
     if player1_choice == "x"

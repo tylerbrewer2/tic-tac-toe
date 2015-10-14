@@ -51,15 +51,11 @@ class WinCheck
     win = nil
 
     @board.size.times do |n|
-      @board.current_board.each do |row|
-        row_inputs1 << @board.current_board[-n - 1]
-      end
+      row_inputs1 << @board.current_board[n][-n - 1]
     end
 
     @board.size.times do |n|
-      @board.current_board.each do |row|
-        row_inputs2 << @board.current_board[n]
-      end
+      row_inputs2 << @board.current_board[n][n]
     end
 
     if check(row_inputs1) || check(row_inputs2)

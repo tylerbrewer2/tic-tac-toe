@@ -7,13 +7,12 @@ class WinCheck
 
   def run
     if horizontal || vertical || diagnal
-      binding.pry
       true
     end
   end
 
   def check (arr)
-    if arr.flatten == ("X" * @board.size) || arr.flatten == ("O" * @board.size)
+    if arr.join == ("X" * @board.size) || arr.join == ("O" * @board.size)
       true
     end
   end
@@ -49,7 +48,7 @@ class WinCheck
   def diagnal
     row_inputs1 = []
     row_inputs2 = []
-    win = false
+    win = nil
 
     @board.size.times do |n|
       @board.current_board.each do |row|

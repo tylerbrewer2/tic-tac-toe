@@ -1,22 +1,30 @@
 class Game
 
-  def initialize(board_size)
-    @board = Board.new(board_size)
-    @win_checker = WinCheck.new(self, @board)
-
-
+  def initialize
+    @board = nil
+    @win_checker = nil
     @current_player = nil
     set_up_game
     play_turn(@player1)
   end
 
   def set_up_game
-    puts "Welcome to Traveler! (insert corny game music here)"
+    puts "=" * 30
+    puts
+    puts "Welcome Traveler! Happy almost Halloween!"
+    puts
     puts "_______     |_|     _______"
     puts "\\      \\____|_|____/      /"
     puts " \\         BATMAN        / "
     puts "  \\_________   _________/   "
     puts "            \\ /             "
+    puts
+    puts "=" * 30
+    puts
+    puts "How large would you like the board size to be?(numbers only please)"
+    number_choice = gets.chomp
+    @board = Board.new(number_choice.to_i)
+    @win_checker = WinCheck.new(self, @board)
     puts "Player-1, would you like to be X or O"
     player1_choice = gets.chomp.downcase
     if player1_choice == "x"
@@ -58,7 +66,7 @@ class Game
     puts "Would you like to play again? (yes/no)"
     input = gets.chomp.downcase
     if input == "yes"
-      Game.new(3)
+      Game.new
     else
       puts "Thanks for playing!"
     end

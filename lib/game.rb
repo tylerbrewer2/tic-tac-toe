@@ -32,6 +32,7 @@ class Game
 
     if @win_checker.run
       puts "#{player.name} wins!"
+      play_again?
     else
       play_turn(next_player)
     end
@@ -43,6 +44,16 @@ class Game
 
     else
       @current_player = @player1
+    end
+  end
+
+  def play_again?
+    puts "Would you like to play again? (yes/no)"
+    input = gets.chomp.downcase
+    if input == "yes"
+      Game.new(3)
+    else
+      puts "Thanks for playing!"
     end
   end
 

@@ -23,7 +23,6 @@ class WinCheck
       @board.current_board.each do |row|
         check(row) # checks each row in win_check
         if check(row)
-          binding.pry
           win = true
         end
       end

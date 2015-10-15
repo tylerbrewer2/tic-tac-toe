@@ -1,12 +1,9 @@
 class Game
 
   def initialize
-    @board = nil
-    @win_checker = nil
-    @current_player = nil
     @move_count = 0
     set_up_game
-    play_turn(@player1)
+    play_turn(@current_player)
   end
 
   def set_up_game
@@ -14,7 +11,7 @@ class Game
     get_board_size
     @win_checker = WinCheck.new(self, @board)
     choose_marker
-    @current_player = @player1
+    randomize?
   end
 
   def play_turn(player)
@@ -95,4 +92,22 @@ class Game
     end
   end
 
+  def randomize?
+    puts "Would you like to randomize who goes first?"
+    input = gets.chomp.downcase
+    if input == "yes"
+      get_random_player
+    else
+      @current_player = @player1
+    end
+  end
+
+  def get_random_player
+    random_number = 2
+    if random_number == 1
+      @current_player = @player1
+    else
+      @current_player = @computer
+    end
+  end
 end

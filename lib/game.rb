@@ -4,47 +4,23 @@ class Game
     @board = nil
     @win_checker = nil
     @current_player = nil
+    @move_count = 0
     set_up_game
     play_turn(@player1)
   end
 
   def set_up_game
-    puts "=" * 30
-    puts
-    puts "Welcome Traveler! Happy almost Halloween!"
-    puts
-    puts "_______     |_|     _______"
-    puts "\\      \\____|_|____/      /"
-    puts " \\         BATMAN        / "
-    puts "  \\_________   _________/   "
-    puts "            \\ /             "
-    puts
-    puts "=" * 30
-    puts
-    puts "How large would you like the board size to be?(numbers only please)"
-    number_choice = gets.chomp
-    @board = Board.new(number_choice.to_i)
+    batman!
+    get_board_size
     @win_checker = WinCheck.new(self, @board)
-    puts "Player-1, would you like to be X or O"
-    player1_choice = gets.chomp.downcase
-    if player1_choice == "x"
-      @player1 = Player.new("Player1", "X")
-      @computer = Computer.new("Computer", "O")
-      @current_player = @player1
-    elsif player1_choice == "o"
-      @player1 = Player.new("Player1", "O")
-      @computer = Computer.new("Computer", "X")
-      @current_player = @player1
-    else
-      "Please enter a valid input"
-      set_up_game
-    end
+    choose_marker
+    @current_player = @player1
   end
 
   def play_turn(player)
+    maximum_moves?
     @board.show_board
     player.choose_position(@board)
-
     if @win_checker.run
       puts "#{player.name} wins!"
       play_again?
@@ -56,7 +32,6 @@ class Game
   def next_player
     if @current_player == @player1
       @current_player = @computer
-
     else
       @current_player = @player1
     end
@@ -69,6 +44,54 @@ class Game
       Game.new
     else
       puts "Thanks for playing!"
+    end
+  end
+
+  def maximum_moves?
+    if @move_count >= (@board.size * @board.size)
+      puts "It's a draw!"
+      play_again?
+    end
+  end
+
+  def batman!
+    puts "=" * 30
+    puts
+    puts "Welcome Traveler! Happy almost Halloween!"
+    puts
+    puts "_______     |_|     _______"
+    puts "\\      \\____|_|____/      /"
+    puts "  \\       BATMAN        / "
+    puts "   \\________   ________/   "
+    puts "            \\ /             "
+    puts
+    puts "=" * 30
+    puts
+  end
+
+  def get_board_size
+    puts "How large would you like the board size to be?(numbers only please)"
+    number_choice = gets.chomp
+    if number_choice.to_i != 0
+      @board = Board.new(number_choice.to_i)
+    else
+      puts "Numbers only, please!"
+      get_board_size
+    end
+  end
+
+  def choose_marker
+    puts "Player-1, would you like to be X or O"
+    player1_choice = gets.chomp.downcase
+    if player1_choice == "x"
+      @player1 = Player.new("Player1", "X")
+      @computer = Computer.new("Computer", "O")
+    elsif player1_choice == "o"
+      @player1 = Player.new("Player1", "O")
+      @computer = Computer.new("Computer", "X")
+    else
+      "Please enter a valid input"
+      set_up_game
     end
   end
 

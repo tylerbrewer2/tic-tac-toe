@@ -1,8 +1,9 @@
 class Board
-  attr_reader :size, :current_board
+  attr_reader :size, :current_board, :past_moves
   def initialize(size)
     @size = size.to_i
     @current_board = create_board(size)
+    @past_moves = []
   end
 
   def create_board(desired_size)
@@ -27,11 +28,10 @@ class Board
   end
 
   def update_board(position, player)
+    @past_moves << position.to_i
     @current_board.each do |row|
       index = row.index(position.to_i)
-      if index
-        row[index] = player.marking
-      end
+      row[index] = player.marking if index
     end
   end
 

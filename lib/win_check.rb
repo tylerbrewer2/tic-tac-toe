@@ -62,5 +62,5 @@ class WinCheck
     end
     win
   end
-
+  
 end

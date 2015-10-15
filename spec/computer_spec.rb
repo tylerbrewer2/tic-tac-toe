@@ -15,10 +15,16 @@ RSpec.describe Computer do
     end
   end
 
-  # context "is able to choose a position" do
-  #   it "updates board to be updated" do
-  #     # enter 1 on this test
-  #     expect(player.choose_position(board)).to eq([["X", 2, 3], [4, 5, 6], [7, 8, 9]])
-  #   end
-  # end
+  context "generate a random position" do
+    it "returns a number" do
+      expect(computer.random_position(board)).to be_between(1, (board.size * board.size))
+    end
+  end
+
+  context "can choose a random position" do
+    it "returns updated board" do
+      expect(computer.choose_position(board).flatten).to include("O")
+    end
+  end
+
 end

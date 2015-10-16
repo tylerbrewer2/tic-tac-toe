@@ -16,6 +16,8 @@ class Game
 
   def play_turn(player)
     maximum_moves?
+    puts "=" * 30
+    puts
     @board.show_board
     player.choose_position(@board)
     if @win_checker.run

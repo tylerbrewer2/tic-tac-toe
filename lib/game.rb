@@ -87,8 +87,8 @@ class Game
       @player1 = Player.new("Player1", "O")
       @computer = Computer.new("Computer", "X")
     else
-      "Please enter a valid input"
-      set_up_game
+      puts "Please enter 'X' or 'O'"
+      choose_marker
     end
   end
 
@@ -97,8 +97,11 @@ class Game
     input = gets.chomp.downcase
     if input == "yes"
       get_random_player
-    else
+    elsif input == "no"
       @current_player = @player1
+    else
+      puts "Please enter 'yes' or 'no'"
+      randomize?
     end
   end
 
